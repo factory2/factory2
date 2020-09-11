@@ -128,3 +128,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Static
+static/
+static_in_dev/
+
+# Templates
+templates/

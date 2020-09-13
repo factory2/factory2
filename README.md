@@ -11,7 +11,7 @@ python3 -m vevn venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
-vim holovin/settings_local.py
+vim factory2/settings_local.py
 ```
 ```python
 SECRET_KEY = 'entersecretkey!!!!!tkekekrlud=jo8+97oo+&90i@a@4c$w1=g+iz#wup!m$_voqrepf2%s'

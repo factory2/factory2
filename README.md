@@ -24,5 +24,5 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-##License
+## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)

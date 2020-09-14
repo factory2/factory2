@@ -7,7 +7,7 @@ git clone https://github.com/factory2/factory2.git
 cd factory2
 git clone https://github.com/factory2/static_in_dev.git
 git clone https://github.com/factory2/templates.git
-python3 -m vevn venv
+python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt

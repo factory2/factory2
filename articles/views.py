@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Article
 
 def articles(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('code')
     return render(request, 'articles/articles.html', {'articles': articles})
 
 def article_detail(request, code):

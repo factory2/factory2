@@ -24,7 +24,7 @@ class Article(models.Model):
         return self.code
 
 class ThermalDeburring(models.Model):
-    code=models.ForeignKey(Article, on_delete=models.CASCADE)
+    code=models.OneToOneField(Article, on_delete=models.CASCADE, primary_key=True)
     slug=AutoSlugField(populate_from='code')
     basket=models.ForeignKey(Basket,on_delete=models.CASCADE,blank=True,null=True)
     parameter=models.ForeignKey(Parameter,on_delete=models.CASCADE,blank=True,null=True)

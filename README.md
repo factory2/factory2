@@ -24,5 +24,17 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+## Brand customization
+```bash
+mkdir includes
+vim templates/includes/brand.html
+```
+```html
+{% load staticfiles %}
+<a class="navbar-brand" href="/">
+	<img src="{% static "logos/logo.svg" %}" height="32" class="d-inline-block align-top" alt="" loading="lazy">
+	<span class="text-success">Factory2</span>
+</a>
+```
 ## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)

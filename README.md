@@ -36,6 +36,12 @@ vim templates/includes/brand.html
 	<span class="text-success">Factory2</span>
 </a>
 ```
+```bash
+vim includes/title.html
+```
+```html
+<title>factory2</title>
+```
 ## Change logo
 In the local machine
 ```bash

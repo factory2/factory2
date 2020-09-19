@@ -26,7 +26,7 @@ python manage.py runserver
 
 ## Brand customization
 ```bash
-mkdir includes
+mkdir templates/includes
 vim templates/includes/brand.html
 ```
 ```html
@@ -35,6 +35,18 @@ vim templates/includes/brand.html
 	<img src="{% static "logos/logo.svg" %}" height="32" class="d-inline-block align-top" alt="" loading="lazy">
 	<span class="text-success">Factory2</span>
 </a>
+```
+## Change logo
+In the local machine
+```bash
+sudo scp -i /home/admin/Downloads/Key.pem /home/admin/Pictures/logo.svg admin@0.0.0.0:/home/admin/factory2/static_in_dev/logos/logo.svg
+```
+In the host machine
+```bash
+cd factory2 && source venv/bin/activate
+python manage.py collectstatic
+sudo systemctl restart gunicorn
+sudo systemctl reload nginx
 ```
 ## License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)

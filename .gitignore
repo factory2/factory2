@@ -135,3 +135,6 @@ static_in_dev/
 
 # Templates
 templates/
+
+#Media
+media/

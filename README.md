@@ -1,6 +1,14 @@
 # factory2
 Factory project
-
+## Pre-installation
+For ArchLinux
+```bash
+sudo pacman -Syu && sudo pacman -S gettext git
+```
+For Debian 10
+```bash
+sudo apt update && sudo apt-get install gettext git
+```
 ## Installation
 ```bash
 git clone https://github.com/factory2/factory2.git

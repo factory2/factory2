@@ -45,11 +45,16 @@ vim templates/includes/brand.html
 </a>
 ```
 ```bash
-vim includes/title.html
+vim templates/includes/title.html
 ```
 ```html
 <title>factory2</title>
 ```
+## Compile languages
+```bash
+django-admin compilemessages
+```
+
 ## Change logo
 In the local machine
 ```bash

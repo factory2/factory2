@@ -25,6 +25,7 @@ vim factory2/settings_local.py
 SECRET_KEY = 'entersecretkey!!!!!tkekekrlud=jo8+97oo+&90i@a@4c$w1=g+iz#wup!m$_voqrepf2%s'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
+LANGUAGE_CODE = 'en-us'
 ```
 ```bash
 python manage.py migrate

@@ -136,5 +136,8 @@ static_in_dev/
 # Templates
 templates/
 
-#Media
+# Media
 media/
+
+# AWS
+storage_backends.py

@@ -126,7 +126,8 @@ LOCALE_PATHS = (
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Try and import local settings which can be used to override any of the above.
 try:

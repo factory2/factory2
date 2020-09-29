@@ -24,6 +24,7 @@ admin.site.index_title = "Welcome to Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('articles.urls')),
     path('tasks/', include('tasks.urls')),

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'accounts',
     'sorl.thumbnail',
     'articles',
     'machines',
@@ -99,7 +100,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/account'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Internationalization

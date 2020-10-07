@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('articles.urls')),
     path('tasks/', include('tasks.urls')),
+    path('zamak/', include('zamak.urls')),
 ]
 
 if settings.DEBUG:

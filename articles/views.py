@@ -18,6 +18,8 @@ def article_new(request):
             article = form.save(commit=False)
             article.save()
             return redirect('article_detail', code=article.code)
+        else:
+            return render(request, 'articles/article_edit.html', {'form': form}, locals())
     else:
         form = ArticleForm()
         return render(request, 'articles/article_edit.html', {'form': form}, locals())

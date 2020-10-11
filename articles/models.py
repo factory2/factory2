@@ -11,4 +11,6 @@ class Article(models.Model):
 
     def __str__(self):
         return self.code
-
+    
+    class Meta:
+        ordering = ['code']

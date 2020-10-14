@@ -2,7 +2,7 @@ from django import forms
 
 from .models import Zamak
 
-class ZamakForm(forms.ModelForm):
+class ZamaForm(forms.ModelForm):
 
     class Meta:
         model = Zamak

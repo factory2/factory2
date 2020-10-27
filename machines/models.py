@@ -1,9 +1,10 @@
 from django.db import models
+from autoslug import AutoSlugField
 
 class Machine(models.Model):
     name = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
-
+    slug = AutoSlugField(populate_from='name')
 
 #ThermalDeburrer machine
 

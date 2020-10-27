@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-27 10:06+0100\n"
+"POT-Creation-Date: 2020-10-27 10:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,8 @@ msgid "All articles"
 msgstr "Tutti gli articoli"
 
 #: templates/base.html:28
+#: templates/tasks/article_thermal_deburring_detail.html:15
+#: templates/tasks/articles_thermal_deburring.html:14
 #, fuzzy
 #| msgid "Thermal deburning"
 msgid "Thermal deburring"
@@ -65,11 +67,6 @@ msgstr "Se non hai un account"
 #: templates/registration/account.html:11
 msgid "Sign Up"
 msgstr "Registrati"
-
-#: templates/tasks/article_thermal_deburring_detail.html:15
-#: templates/tasks/articles_thermal_deburring.html:14
-msgid "Thermal deburning"
-msgstr "Sbavatura termica"
 
 #: templates/tasks/article_thermal_deburring_detail.html:30
 msgid "Basket"
@@ -1258,3 +1255,6 @@ msgstr ""
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:408
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Thermal deburning"
+#~ msgstr "Sbavatura termica"

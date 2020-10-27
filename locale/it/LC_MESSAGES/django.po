@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-23 12:43+0200\n"
+"POT-Creation-Date: 2020-10-27 10:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/articles/article_detail.html:11
-#: templates/tasks/article_thermal_deburring_detail.html:17
+#: templates/articles/article_detail.html:19
+#: templates/tasks/article_thermal_deburring_detail.html:25
 msgid "Code"
 msgstr "Codice"
 
-#: templates/articles/article_detail.html:53
+#: templates/articles/article_detail.html:61
+#: templates/zamak/zama_detail.html:58
 msgid "Description"
 msgstr "Description"
 
-#: templates/articles/articles.html:6
+#: templates/articles/articles.html:14 templates/base.html:25
 msgid "All articles"
 msgstr "Tutti gli articoli"
 
-#: templates/tasks/article_thermal_deburring_detail.html:7
-#: templates/tasks/articles_thermal_deburring.html:6
+#: templates/base.html:28
+#, fuzzy
+#| msgid "Thermal deburning"
+msgid "Thermal deburring"
+msgstr "Sbavatura termica"
+
+#: templates/blog/home.html:5
+msgid "Home page"
+msgstr "Pagina iniziale"
+
+#: templates/registration/account.html:6
+msgid "Hi"
+msgstr "Ciao"
+
+#: templates/registration/account.html:7
+msgid "Log Out"
+msgstr "Disconnettersi"
+
+#: templates/registration/account.html:9
+msgid "You are not logged in"
+msgstr "Non sei loggato"
+
+#: templates/registration/account.html:9
+msgid "Log In"
+msgstr "Accesso"
+
+#: templates/registration/account.html:11
+msgid "If you don't have account"
+msgstr "Se non hai un account"
+
+#: templates/registration/account.html:11
+msgid "Sign Up"
+msgstr "Registrati"
+
+#: templates/tasks/article_thermal_deburring_detail.html:15
+#: templates/tasks/articles_thermal_deburring.html:14
 msgid "Thermal deburning"
 msgstr "Sbavatura termica"
 
-#: templates/tasks/article_thermal_deburring_detail.html:22
+#: templates/tasks/article_thermal_deburring_detail.html:30
 msgid "Basket"
 msgstr "Cestello"
 
-#: templates/tasks/article_thermal_deburring_detail.html:28
+#: templates/tasks/article_thermal_deburring_detail.html:36
 msgid "Parameter"
 msgstr "Parametri"
 
-#: templates/tasks/article_thermal_deburring_detail.html:34
+#: templates/tasks/article_thermal_deburring_detail.html:42
 msgid "Article detail"
 msgstr "Detaglio articolo"
 

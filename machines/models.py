@@ -8,9 +8,9 @@ class Machine(models.Model):
 #ThermalDeburrer machine
 
 class BasketDeburring(models.Model):
-    title = models.CharField(max_length=50,unique=True)
+    title = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True)
-
+    image = models.ImageField(upload_to='baskets', blank=True)
     def __str__(self):
         return self.title
 

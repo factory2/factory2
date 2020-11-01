@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Article
 from .forms import ArticleForm
+from rest_framework import viewsets
+from .serializers import ArticleSerializer
 
 def articles(request):
     articles = Article.objects.all().order_by('code')
@@ -35,3 +37,7 @@ def article_edit(request, code):
     else:
         form = ArticleForm(instance=article)
         return render(request, 'articles/article_edit.html', {'form': form}, locals())
+
+class ArticleView(viewsets.ModelViewSet):
+    serializer_class = ArticleSerializer
+    queryset = Article.objects.all()

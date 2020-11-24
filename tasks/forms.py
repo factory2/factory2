@@ -6,4 +6,4 @@ class ThermalDeburringForm(forms.ModelForm):
 
     class Meta:
         model = ThermalDeburring
-        fields = ('code', 'basket_deburring', 'parameter_deburring')
+        fields = ('code', 'basket_deburring', 'parameter_deburring', 'description')

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'storages',
     'accounts',
     'sorl.thumbnail',
+    'import_export',
     'articles',
     'machines',
     'tasks',

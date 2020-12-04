@@ -2,10 +2,14 @@ defusedxml==0.6.0
 diff-match-patch==20200713
 Django==2.2.16
 django-autoslug==1.9.8
+django-cors-headers==3.5.0
+django-filter==2.4.0
 django-import-export==2.4.0
 django-storages==1.10.1
+djangorestframework==3.12.2
 et-xmlfile==1.0.1
 jdcal==1.4.1
+Markdown==3.3.3
 MarkupPy==1.14
 odfpy==1.4.1
 openpyxl==3.0.5

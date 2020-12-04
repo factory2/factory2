@@ -17,7 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
+from articles import views
 
+router = routers.DefaultRouter()
+router.register(r'articles', views.ArticleView, 'article')
 admin.site.site_header = "Administration"
 admin.site.site_title = "Admin Portal"
 admin.site.index_title = "Welcome to Admin Portal"
@@ -30,6 +34,7 @@ urlpatterns = [
     path('articles/', include('articles.urls')),
     path('tasks/', include('tasks.urls')),
     path('zamak/', include('zamak.urls')),
+    path('api/', include(router.urls)),
 ]
 
 if settings.DEBUG:

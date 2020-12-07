@@ -7,6 +7,7 @@ class ThermalDeburringResource(resources.ModelResource):
 
     class Meta:
         model = ThermalDeburring
+        fields = ('article__code', 'basket_deburring__title', 'parameter_deburring__title')
 
 class ThermalDeburringAdmin(ImportExportModelAdmin):
     resource_class = ThermalDeburringResource

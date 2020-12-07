@@ -29,7 +29,7 @@ def article_thermal_deburring_edit(request, article_code):
         if form.is_valid():
             article_thermal_deburring = form.save(commit=False)
             article_thermal_deburring.save()
-            return redirect('article_thermal_deburring_detail', article__code=article_code)
+            return redirect('article_thermal_deburring_detail', article_code=article_thermal_deburring)
     else:
         form = ThermalDeburringForm(instance=article_thermal_deburring)
         return render(request, 'tasks/article_thermal_deburring_edit.html', {'form': form})

@@ -13,3 +13,6 @@ class ThermalDeburring(models.Model):
 
     def __str__(self):
         return self.article.code
+
+    class Meta:
+        ordering = ['article__code']

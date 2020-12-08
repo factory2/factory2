@@ -4,7 +4,7 @@ from .models import ThermalDeburring
 from .forms import ThermalDeburringForm
 
 def articles_thermal_deburring(request):
-    articles_thermal_deburring = ThermalDeburring.objects.all().order_by('article__code')
+    articles_thermal_deburring = ThermalDeburring.objects.all()
     return render(request, 'tasks/articles_thermal_deburring.html', {'articles_thermal_deburring': articles_thermal_deburring})
 
 def article_thermal_deburring_detail(request, article_code):

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'accounts',
+    'crispy_forms',
     'rest_framework',
     'corsheaders',
     'sorl.thumbnail',
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'tasks',
     'zamak',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

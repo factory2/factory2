@@ -42,3 +42,8 @@ def article_edit(request, code):
 class ArticleView(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     queryset = Article.objects.all()
+
+
+def pallets(request):
+    return HttpResponse("Hello, world. You're at the pallets.")
+

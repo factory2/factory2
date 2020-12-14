@@ -9,7 +9,6 @@ class ThermalDeburring(models.Model):
     basket_deburring = models.ForeignKey(BasketDeburring,on_delete=models.CASCADE,blank=True,null=True)
     parameter_deburring = models.ForeignKey(ParameterDeburring,on_delete=models.CASCADE,blank=True,null=True)
     description = models.TextField(blank=True, null=True)
-    done_article = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.article.code

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Article(models.Model):
     code=models.SlugField(max_length=50,unique=True)
@@ -10,15 +11,20 @@ class Article(models.Model):
     image3=models.ImageField(upload_to='articles',blank=True, null=True) 
     image4=models.ImageField(upload_to='articles',blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
-
 
     def __str__(self):
         return self.code
     
     class Meta:
         ordering = ['code']
+
+class Pallet(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+    for_thermal_deburring = models.BooleanField(default=False)
+    created_date = models.DateTimeField(default=timezone.now)
+    employee = models.ForeignKey(User, on_delete = models.CASCADE)
+    
+    def __str__(self):
+        date_time = self.created_date.strftime("%d/%m/%Y, %H:%M:%S")
+        return date_time + ", " + self.article.code

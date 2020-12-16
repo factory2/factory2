@@ -28,3 +28,6 @@ class Pallet(models.Model):
     def __str__(self):
         date_time = self.created_date.strftime("%d/%m/%Y, %H:%M:%S")
         return date_time + ", " + self.article.code
+
+    class Meta:
+        ordering = ['-created_date']

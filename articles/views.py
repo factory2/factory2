@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Article
+from .models import Article, Pallet
 from .forms import ArticleForm
 from rest_framework import viewsets
 from .serializers import ArticleSerializer
@@ -45,5 +45,17 @@ class ArticleView(viewsets.ModelViewSet):
 
 
 def pallets(request):
-    return HttpResponse("Hello, world. You're at the pallets.")
+    pallets = Pallet.objects.all()
+    return render(request, 'production/pallets.html', {'pallets': pallets})
 
+
+def pallet_new(request):
+    if request.method == "POST":
+        form = PalletForm(request.POST)
+        if form.is_valid():
+            pallet = form.save(commit=False)
+            pallet.save()
+            return redirect('pallets')
+    else:
+        form = PalletForm()
+        return render(request, 'production/pallets.html', {'form': form})

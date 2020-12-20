@@ -12,6 +12,7 @@ class Article(models.Model):
     image4=models.ImageField(upload_to='articles', blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+    for_thermal_deburring = models.BooleanField(default=True)
 
     def __str__(self):
         return self.code
@@ -22,7 +23,6 @@ class Article(models.Model):
 class Pallet(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
-    for_thermal_deburring = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=timezone.now)
     employee = models.ForeignKey(User, on_delete = models.CASCADE)
     

@@ -11,4 +11,4 @@ class ArticleForm(forms.ModelForm):
 class PalletForm(forms.ModelForm):
     class Meta:
         model = Pallet
-        fields = ('article', 'quantity',)
+        fields = ('article', 'quantity', 'created_date',)

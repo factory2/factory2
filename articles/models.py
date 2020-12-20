@@ -20,11 +20,12 @@ class Article(models.Model):
     class Meta:
         ordering = ['code']
 
+
 class Pallet(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     created_date = models.DateTimeField(default=timezone.now)
-    employee = models.ForeignKey(User, on_delete = models.CASCADE)
+    employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     
     def __str__(self):
         date_time = self.created_date.strftime("%d/%m/%Y, %H:%M:%S")

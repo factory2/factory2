@@ -55,7 +55,7 @@ def pallet_new(request):
         if form.is_valid():
             pallet = form.save(commit=False)
             pallet.save()
-            return redirect('pallet_new')
+            return redirect('pallets')
     else:
         form = PalletForm()
         return render(request, 'production/pallet_new.html', {'form': form})

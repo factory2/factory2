@@ -31,4 +31,4 @@ class Pallet(models.Model):
         return date_time + ", " + self.article.code
 
     class Meta:
-        ordering = ['-created_date']
+        ordering = ['article__code', '-created_date']

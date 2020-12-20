@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Article, Pallet
-from .forms import ArticleForm
+from .forms import ArticleForm, PalletForm
 from rest_framework import viewsets
 from .serializers import ArticleSerializer
 
@@ -55,7 +55,7 @@ def pallet_new(request):
         if form.is_valid():
             pallet = form.save(commit=False)
             pallet.save()
-            return redirect('pallets')
+            return redirect('pallet_new')
     else:
         form = PalletForm()
-        return render(request, 'production/pallets.html', {'form': form})
+        return render(request, 'production/pallet_new.html', {'form': form})

@@ -27,3 +27,7 @@ class PalletThermalDeburred(models.Model):
     def __str__(self):
         date_time = self.thermal_deburred_date.strftime("%d/%m/%Y, %H:%M:%S")
         return date_time + ", " + self.pallet.article.code
+    class Meta:
+        ordering = ['-thermal_deburred_date']
+
+

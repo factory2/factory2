@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Article, Pallet
 from .forms import ArticleForm, PalletForm
+from tasks.models import PalletThermalDeburred
 from rest_framework import viewsets
 from .serializers import ArticleSerializer
 
@@ -59,3 +60,8 @@ def pallet_new(request):
     else:
         form = PalletForm()
         return render(request, 'production/pallet_new.html', {'form': form})
+
+
+def pallets_thermal_deburred(request):
+    pallets_thermal_deburred = PalletThermalDeburred.objects.all()
+    return render(request, 'articles/pallets_thermal_deburred.html', {'pallets_thermal_deburred': pallets_thermal_deburred})

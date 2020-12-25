@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import ThermalDeburring
+from .models import ThermalDeburring, PalletThermalDeburred
 from .forms import ThermalDeburringForm
 
 def articles_thermal_deburring(request):
@@ -33,3 +33,4 @@ def article_thermal_deburring_edit(request, article_code):
     else:
         form = ThermalDeburringForm(instance=article_thermal_deburring)
         return render(request, 'tasks/article_thermal_deburring_edit.html', {'form': form})
+

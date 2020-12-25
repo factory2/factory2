@@ -19,6 +19,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from articles import views
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
 
 router = routers.DefaultRouter()
 router.register(r'articles', views.ArticleView, 'article')
@@ -28,13 +30,14 @@ admin.site.index_title = "Welcome to Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True))),
+    path('api/', include(router.urls)),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('blog.urls')),
     path('articles/', include('articles.urls')),
     path('tasks/', include('tasks.urls')),
     path('zamak/', include('zamak.urls')),
-    path('api/', include(router.urls)),
 ]
 
 if settings.DEBUG:

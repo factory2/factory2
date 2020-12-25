@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',
     'storages',
     'accounts',
     'crispy_forms',
@@ -42,8 +43,17 @@ INSTALLED_APPS = [
     'machines',
     'tasks',
     'zamak',
+    'blog',
 ]
 
+
+# Graphene
+GRAPHENE = {
+    "SCHEMA": "schema.schema"
+}
+
+
+# Crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [

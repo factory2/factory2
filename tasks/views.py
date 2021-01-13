@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import ThermalDeburring, PalletThermalDeburred
-from .forms import ThermalDeburringForm
+from .forms import ThermalDeburringForm, PalletThermalDeburredForm
 
 def articles_thermal_deburring(request):
     articles_thermal_deburring = ThermalDeburring.objects.all()
@@ -36,3 +36,16 @@ def article_thermal_deburring_edit(request, article_code):
         form = ThermalDeburringForm(instance=article_thermal_deburring)
         return render(request, 'tasks/article_thermal_deburring_edit.html', {'form': form})
 
+def pallet_thermal_deburred_new(request):
+    if request.method == "POST":
+        form = PalletThermalDeburredForm(request.POST)
+        if form.is_valid():
+            pallet_thermal_deburred = form.save(commit=False)
+            pallet_thermal_deburred.employee = request.user
+            pallet_thermal_deburred.save()
+            return redirect('pallets_thermal_deburred')
+        else:
+            return render(request, 'tasks/pallet_thermal_deburred_edit.html', {'form': form})
+    else:
+        form = PalletThermalDeburredForm()
+        return render(request, 'tasks/pallet_thermal_deburred_edit.html', {'form': form})

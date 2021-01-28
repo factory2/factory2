@@ -25,6 +25,7 @@ class Article(models.Model):
 class Pallet(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
+    weight = models.PositiveIntegerField(blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     

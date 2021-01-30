@@ -56,7 +56,7 @@ def pallet_new(request):
         if form.is_valid():
             pallet = form.save(commit=False)
             if pallet.article.weight:
-              pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
+                pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
             pallet.save()
             return redirect('pallets')
     else:

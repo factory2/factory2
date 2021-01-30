@@ -13,4 +13,4 @@ class PalletThermalDeburredForm(forms.ModelForm):
 
     class Meta:
         model = PalletThermalDeburred
-        fields = ('pallet', 'thermal_deburred_date',)
+        fields = ('pallet', 'thermal_deburred_date', 'quantity_no_ok',)

@@ -41,11 +41,15 @@ def pallet_thermal_deburred_new(request):
         form = PalletThermalDeburredForm(request.POST)
         if form.is_valid():
             pallet_thermal_deburred = form.save(commit=False)
-            pallet_thermal_deburred.employee = request.user
-            pallet_thermal_deburred.quantity = pallet_thermal_deburred.pallet.quantity - pallet_thermal_deburred.quantity_no_ok
-            pallet_thermal_deburred.weight = pallet_thermal_deburred.quantity * pallet_thermal_deburred.pallet.article.weight / 1000
-            pallet_thermal_deburred.save()
-            return redirect('pallets_thermal_deburred')
+            if pallet_thermal_deburred.pallet.quantity > pallet_thermal_deburred.quantity_no_ok:
+                pallet_thermal_deburred.employee = request.user
+                pallet_thermal_deburred.quantity = pallet_thermal_deburred.pallet.quantity - pallet_thermal_deburred.quantity_no_ok
+                pallet_thermal_deburred.weight = pallet_thermal_deburred.quantity * pallet_thermal_deburred.pallet.article.weight / 1000
+                pallet_thermal_deburred.save()
+                return redirect('pallets_thermal_deburred')
+            else:
+                error = "The number cannot be greather than the index number"
+                return render(request, 'tasks/pallet_thermal_deburred_edit.html', { 'form': form, 'error':error })
         else:
             return render(request, 'tasks/pallet_thermal_deburred_edit.html', {'form': form})
     else:

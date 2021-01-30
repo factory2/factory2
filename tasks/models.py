@@ -32,5 +32,3 @@ class PalletThermalDeburred(models.Model):
         return date_time + ", " + self.pallet.article.code
     class Meta:
         ordering = ['-thermal_deburred_date']
-
-

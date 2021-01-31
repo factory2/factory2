@@ -6,7 +6,7 @@ class Article(models.Model):
     code=models.SlugField(max_length=50, unique=True)
     title=models.CharField(max_length=200, blank=True, null=True)
     description=models.TextField(blank=True, null=True)
-    weight = models.PositiveIntegerField(blank=True, null=True)
+    weight = models.PositiveIntegerField(default=1)
     image1=models.ImageField(upload_to='articles', blank=True, null=True)
     image2=models.ImageField(upload_to='articles', blank=True, null=True)
     image3=models.ImageField(upload_to='articles', blank=True, null=True) 

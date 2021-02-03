@@ -33,6 +33,7 @@ def article_edit(request, code):
         form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             article = form.save(commit=False)
+
             article.save()
             return redirect('article_detail', code=article.code)
     else:
@@ -55,8 +56,7 @@ def pallet_new(request):
         form = PalletForm(request.POST)
         if form.is_valid():
             pallet = form.save(commit=False)
-            if pallet.article.weight:
-                pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
+            pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
             pallet.save()
             return redirect('pallets')
     else:

@@ -39,10 +39,10 @@ def article_edit(request, code):
                 if article.code == pallet.article.code:
                     pallet.weight = article.weight * pallet.quantity / 1000
                     pallet.save()
-                    for pallet_thermal_deburred in pallets_thermal_deburred:
-                        if article.code == pallet_thermal_deburred.pallet.article.code:
-                            pallet_thermal_deburred.weight = pallet_thermal_deburred.quantity * article.weight / 1000
-                            pallet_thermal_deburred.save()
+            for pallet_thermal_deburred in pallets_thermal_deburred:
+                if article.code == pallet_thermal_deburred.pallet.article.code:
+                    pallet_thermal_deburred.weight = pallet_thermal_deburred.quantity * article.weight / 1000
+                    pallet_thermal_deburred.save()
             article.save()
             return redirect('article_detail', code=article.code)
     else:

@@ -23,7 +23,7 @@ class PalletThermalDeburred(models.Model):
     pallet = models.OneToOneField(Pallet, primary_key=True, on_delete=models.CASCADE)
     thermal_deburred_date = models.DateTimeField(default=timezone.now)
     employee = models.ForeignKey(User, on_delete = models.CASCADE)
-    quantity = models.PositiveIntegerField(blank=True, null=True)
+    quantity = models.PositiveIntegerField(default=1)
     quantity_no_ok = models.PositiveIntegerField(default=0)
     weight = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
 

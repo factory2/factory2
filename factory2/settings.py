@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'import_export',
     'articles',
     'machines',
+    'departments',
     'tasks',
     'zamak',
     'blog',

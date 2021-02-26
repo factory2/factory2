@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from departments.models import Department
 
 class Article(models.Model):
     code=models.SlugField(max_length=50, unique=True)
@@ -27,6 +28,7 @@ class Pallet(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     weight = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
+    department = models.ForeignKey(Department, on_delete = models.CASCADE, blank=True, null=True)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     
     def __str__(self):

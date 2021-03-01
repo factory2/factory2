@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Article, Pallet
-from .forms import ArticleForm, PalletForm
+from .forms import ArticleNewForm, ArticleEditForm, PalletForm
 from tasks.models import PalletThermalDeburred
 from rest_framework import viewsets
 from .serializers import ArticleSerializer
@@ -16,21 +16,21 @@ def article_detail(request, code):
 
 def article_new(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST, request.FILES)
+        form = ArticleNewForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
             article.save()
             return redirect('article_detail', code=article.code)
         else:
-            return render(request, 'articles/article_edit.html', {'form': form}, locals())
+            return render(request, 'articles/article_new.html', {'form': form}, locals())
     else:
-        form = ArticleForm()
-        return render(request, 'articles/article_edit.html', {'form': form}, locals())
+        form = ArticleNewForm()
+        return render(request, 'articles/article_new.html', {'form': form}, locals())
 
 def article_edit(request, code):
     article = get_object_or_404(Article, code=code)
     if request.method == "POST":
-        form = ArticleForm(request.POST, request.FILES, instance=article)
+        form = ArticleEditForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             article = form.save(commit=False)
             pallets = Pallet.objects.all()
@@ -46,7 +46,7 @@ def article_edit(request, code):
             article.save()
             return redirect('article_detail', code=article.code)
     else:
-        form = ArticleForm(instance=article)
+        form = ArticleEditForm(instance=article)
         return render(request, 'articles/article_edit.html', {'form': form}, locals())
 
 

@@ -30,6 +30,7 @@ class Pallet(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     department = models.ForeignKey(Department, on_delete = models.CASCADE, blank=True, null=True)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+    thermal_deburred = models.BooleanField(default=False)
     
     def __str__(self):
         date_time = self.created_date.strftime("%d/%m/%Y, %H:%M:%S")

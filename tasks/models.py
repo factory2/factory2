@@ -12,6 +12,7 @@ class ThermalDeburring(models.Model):
     parameter_deburring = models.ForeignKey(ParameterDeburring, on_delete=models.CASCADE,blank=True,null=True)
     description = models.TextField(blank=True, null=True)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+    last_change = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.article.code

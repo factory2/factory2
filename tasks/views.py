@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import ThermalDeburring, PalletThermalDeburred
 from .forms import ThermalDeburringNewForm, ThermalDeburringEditForm, PalletThermalDeburredForm
+from django.utils import timezone
 
 def articles_thermal_deburring(request):
     articles_thermal_deburring = ThermalDeburring.objects.all()
@@ -30,6 +31,7 @@ def article_thermal_deburring_edit(request, article_code):
         form = ThermalDeburringEditForm(request.POST, instance=article_thermal_deburring)
         if form.is_valid():
             article_thermal_deburring = form.save(commit=False)
+            article_thermal_deburring.last_change = timezone.now()
             article_thermal_deburring.save()
             return redirect('article_thermal_deburring_detail', article_code=article_thermal_deburring)
     else:

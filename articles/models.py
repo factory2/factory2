@@ -30,6 +30,7 @@ class Pallet(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     department = models.ForeignKey(Department, on_delete = models.CASCADE, blank=True, null=True)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
+    employee_thermal_deburring = models.ForeignKey(User, on_delete = models.CASCADE, related_name='pallet_thermal_deburred', blank=True, null=True)
     thermal_deburred = models.BooleanField(default=False)
     
     def __str__(self):

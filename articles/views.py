@@ -57,12 +57,6 @@ class ArticleView(viewsets.ModelViewSet):
 
 def pallets(request):
     pallets = Pallet.objects.all()
-    pallets_thermal_deburred = PalletThermalDeburred.objects.all()
-    for pallet in pallets:
-        for pallet_thermal_deburred in pallets_thermal_deburred:
-            if pallet_thermal_deburred.pallet == pallet:
-                pallet.employee_thermal_deburring = pallet_thermal_deburred.employee
-                pallet.save()
     return render(request, 'production/pallets.html', {'pallets': pallets})
 
 

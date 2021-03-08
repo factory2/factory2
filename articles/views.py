@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Article, Pallet
-from .forms import ArticleNewForm, ArticleEditForm, PalletForm
+from .forms import ArticleNewForm, ArticleEditForm, PalletForm, PalletThermalDeburredNewForm
 from tasks.models import PalletThermalDeburred
 from rest_framework import viewsets
 from .serializers import ArticleSerializer
@@ -34,15 +34,11 @@ def article_edit(request, code):
         if form.is_valid():
             article = form.save(commit=False)
             pallets = Pallet.objects.all()
-            pallets_thermal_deburred = PalletThermalDeburred.objects.all()
             for pallet in pallets:
                 if article.code == pallet.article.code:
                     pallet.weight = article.weight * pallet.quantity / 1000
+                    pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * article.weight / 1000
                     pallet.save()
-            for pallet_thermal_deburred in pallets_thermal_deburred:
-                if article.code == pallet_thermal_deburred.pallet.article.code:
-                    pallet_thermal_deburred.weight = pallet_thermal_deburred.quantity * article.weight / 1000
-                    pallet_thermal_deburred.save()
             article.save()
             return redirect('article_detail', code=article.code)
     else:
@@ -57,16 +53,7 @@ class ArticleView(viewsets.ModelViewSet):
 
 def pallets(request):
     pallets = Pallet.objects.all()
-    pallets_thermal_deburred = PalletThermalDeburred.objects.all()
-    for pallet in pallets:
-        for pallet_thermal_deburred in pallets_thermal_deburred:
-            if pallet == pallet_thermal_deburred.pallet:
-                pallet.thermal_deburred_date = pallet_thermal_deburred.thermal_deburred_date
-                pallet.quantity_thermal_deburred_no_ok = pallet_thermal_deburred.quantity_no_ok
-                pallet.quantity_thermal_deburred = pallet_thermal_deburred.quantity
-                pallet.weight_thermal_deburred = pallet_thermal_deburred.weight
-                pallet.save()
-    return render(request, 'production/pallets.html', {'pallets': pallets})
+    return render(request, 'articles/pallets.html', {'pallets': pallets})
 
 
 def pallet_new(request):
@@ -79,9 +66,27 @@ def pallet_new(request):
             return redirect('pallets')
     else:
         form = PalletForm()
-        return render(request, 'production/pallet_new.html', {'form': form})
+        return render(request, 'articles/pallet_new.html', {'form': form})
 
+def pallet_thermal_deburred_new(request, pk):
+    pallet = get_object_or_404(Pallet, pk=pk)
+    if request.method == "POST":
+        form = PalletThermalDeburredNewForm(request.POST, instance=pallet)
+        if form.is_valid():
+            pallet = form.save(commit=False)
+            if pallet.quantity > pallet.quantity_thermal_deburred_no_ok:
+                pallet.employee_thermal_deburring = request.user
+                pallet.quantity_thermal_deburred = pallet.quantity - pallet.quantity_thermal_deburred_no_ok
+                pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * pallet.article.weight / 1000
+                pallet.thermal_deburred = True
+                pallet.save()
+                return redirect('pallets')
+            else:
+                error = "The number cannot be greather than the index number"
+                return render(request, 'articles/pallet_thermal_deburred_new.html', { 'form': form, 'error':error })
+        else:
+            return render(request, 'articles/pallet_thermal_deburred_new.html', {'form': form})
+    else:
+        form = PalletThermalDeburredNewForm()
+        return render(request, 'articles/pallet_thermal_deburred_new.html', {'form': form})
 
-def pallets_thermal_deburred(request):
-    pallets_thermal_deburred = PalletThermalDeburred.objects.all()
-    return render(request, 'articles/pallets_thermal_deburred.html', {'pallets_thermal_deburred': pallets_thermal_deburred})

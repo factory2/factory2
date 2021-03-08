@@ -18,3 +18,8 @@ class PalletForm(forms.ModelForm):
     class Meta:
         model = Pallet
         fields = ('article', 'quantity', 'created_date', 'department',)
+
+class PalletThermalDeburredNewForm(forms.ModelForm):
+    class Meta:
+        model = Pallet
+        fields = ('thermal_deburred_date', 'quantity_thermal_deburred_no_ok')

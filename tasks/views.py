@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import ThermalDeburring, PalletThermalDeburred
-from .forms import ThermalDeburringNewForm, ThermalDeburringEditForm, PalletThermalDeburredForm
+from .models import ThermalDeburring
+from .forms import ThermalDeburringNewForm, ThermalDeburringEditForm, PalletThermalDeburredNewForm
 from django.utils import timezone
 
 def articles_thermal_deburring(request):
@@ -38,26 +38,4 @@ def article_thermal_deburring_edit(request, article_code):
     else:
         form = ThermalDeburringEditForm(instance=article_thermal_deburring)
         return render(request, 'tasks/article_thermal_deburring_edit.html', {'form': form})
-
-def pallet_thermal_deburred_new(request):
-    if request.method == "POST":
-        form = PalletThermalDeburredForm(request.POST)
-        if form.is_valid():
-            pallet_thermal_deburred = form.save(commit=False)
-            if pallet_thermal_deburred.pallet.quantity > pallet_thermal_deburred.quantity_no_ok:
-                pallet_thermal_deburred.employee = request.user
-                pallet_thermal_deburred.quantity = pallet_thermal_deburred.pallet.quantity - pallet_thermal_deburred.quantity_no_ok
-                pallet_thermal_deburred.weight = pallet_thermal_deburred.quantity * pallet_thermal_deburred.pallet.article.weight / 1000
-                pallet_thermal_deburred.pallet.thermal_deburred = True
-                pallet_thermal_deburred.pallet.save()
-                pallet_thermal_deburred.save()
-                return redirect('pallets_thermal_deburred')
-            else:
-                error = "The number cannot be greather than the index number"
-                return render(request, 'tasks/pallet_thermal_deburred_edit.html', { 'form': form, 'error':error })
-        else:
-            return render(request, 'tasks/pallet_thermal_deburred_edit.html', {'form': form})
-    else:
-        form = PalletThermalDeburredForm()
-        return render(request, 'tasks/pallet_thermal_deburred_edit.html', {'form': form})
 

@@ -1,6 +1,6 @@
 from django import forms
-
-from .models import ThermalDeburring, PalletThermalDeburred
+from articles.models import Pallet
+from .models import ThermalDeburring
 
 class ThermalDeburringNewForm(forms.ModelForm):
 
@@ -14,8 +14,7 @@ class ThermalDeburringEditForm(forms.ModelForm):
         model = ThermalDeburring
         fields = ('basket_deburring', 'parameter_deburring', 'description')
 
-class PalletThermalDeburredForm(forms.ModelForm):
-
+class PalletThermalDeburredNewForm(forms.ModelForm):
     class Meta:
-        model = PalletThermalDeburred
-        fields = ('pallet', 'thermal_deburred_date', 'quantity_no_ok',)
+        model = Pallet
+        fields = ('quantity_thermal_deburred', 'thermal_deburred_date', 'quantity_thermal_deburred_no_ok')

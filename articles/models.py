@@ -26,8 +26,12 @@ class Article(models.Model):
 class Pallet(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
+    quantity_thermal_deburred_no_ok = models.PositiveIntegerField(default=0)
+    quantity_thermal_deburred = models.PositiveIntegerField(default=1)
     weight = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
+    weight_thermal_deburred = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
+    thermal_deburred_date = models.DateTimeField(default=timezone.now)
     department = models.ForeignKey(Department, on_delete = models.CASCADE, blank=True, null=True)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     employee_thermal_deburring = models.ForeignKey(User, on_delete = models.CASCADE, related_name='pallet_thermal_deburred', blank=True, null=True)

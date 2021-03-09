@@ -37,8 +37,10 @@ def article_edit(request, code):
             for pallet in pallets:
                 if article.code == pallet.article.code:
                     pallet.weight = article.weight * pallet.quantity / 1000
-                    pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * article.weight / 1000
-                    pallet.save()
+                    if pallet.thermal_deburred == True:
+                        pallet.weight_thermal_deburred_no_ok = pallet.quantity_thermal_deburred_no_ok * article.weight / 1000
+                        pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * article.weight / 1000
+                        pallet.save()
             article.save()
             return redirect('article_detail', code=article.code)
     else:
@@ -53,10 +55,6 @@ class ArticleView(viewsets.ModelViewSet):
 
 def pallets(request):
     pallets = Pallet.objects.all()
-    for pallet in pallets:
-        if pallet.thermal_deburred == True:
-            pallet.weight_thermal_deburred_no_ok = pallet.quantity_thermal_deburred_no_ok * pallet.article.weight / 1000
-            pallet.save()
     return render(request, 'articles/pallets.html', {'pallets': pallets})
 
 

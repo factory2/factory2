@@ -55,6 +55,9 @@ class ArticleView(viewsets.ModelViewSet):
 
 def pallets(request):
     pallets = Pallet.objects.all()
+    for pallet in pallets:
+        pallet.employee = request.user
+        pallet.save()
     return render(request, 'articles/pallets.html', {'pallets': pallets})
 
 
@@ -63,6 +66,7 @@ def pallet_new(request):
         form = PalletForm(request.POST)
         if form.is_valid():
             pallet = form.save(commit=False)
+            pallet.employee = request.user 
             pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
             pallet.save()
             return redirect('pallets')

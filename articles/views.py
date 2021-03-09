@@ -55,9 +55,6 @@ class ArticleView(viewsets.ModelViewSet):
 
 def pallets(request):
     pallets = Pallet.objects.all()
-    for pallet in pallets:
-        pallet.employee = request.user
-        pallet.save()
     return render(request, 'articles/pallets.html', {'pallets': pallets})
 
 

@@ -53,6 +53,10 @@ class ArticleView(viewsets.ModelViewSet):
 
 def pallets(request):
     pallets = Pallet.objects.all()
+    for pallet in pallets:
+        if pallet.thermal_deburred == True:
+            pallet.weight_thermal_deburred_no_ok = pallet.quantity_thermal_deburred_no_ok * pallet.article.weight / 1000
+            pallet.save()
     return render(request, 'articles/pallets.html', {'pallets': pallets})
 
 
@@ -77,6 +81,7 @@ def pallet_thermal_deburred_new(request, pk):
             if pallet.quantity > pallet.quantity_thermal_deburred_no_ok:
                 pallet.employee_thermal_deburring = request.user
                 pallet.quantity_thermal_deburred = pallet.quantity - pallet.quantity_thermal_deburred_no_ok
+                pallet.weight_thermal_deburred_no_ok = pallet.quantity_thermal_deburred_no_ok * pallet.article.weight / 1000
                 pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * pallet.article.weight / 1000
                 pallet.thermal_deburred = True
                 pallet.save()

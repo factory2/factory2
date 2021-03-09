@@ -29,6 +29,7 @@ class Pallet(models.Model):
     quantity_thermal_deburred_no_ok = models.PositiveIntegerField(default=0)
     quantity_thermal_deburred = models.PositiveIntegerField(default=1)
     weight = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
+    weight_thermal_deburred_no_ok = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
     weight_thermal_deburred = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     thermal_deburred_date = models.DateTimeField(default=timezone.now)

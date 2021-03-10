@@ -86,7 +86,7 @@ def pallet_thermal_deburred_new(request, pk):
                 pallet.save()
                 return redirect('pallets')
             else:
-                error = "The quantity article no ok can't be more than quantity of all articles in the pallets"
+                error = "The quantity article no ok can't be more than quantity of all articles in the pallet"
                 return render(request, 'articles/pallet_thermal_deburred_new.html', { 'form': form, 'error':error })
         else:
             return render(request, 'articles/pallet_thermal_deburred_new.html', {'form': form})

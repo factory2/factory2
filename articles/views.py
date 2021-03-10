@@ -77,7 +77,7 @@ def pallet_thermal_deburred_new(request, pk):
         form = PalletThermalDeburredNewForm(request.POST, instance=pallet)
         if form.is_valid():
             pallet = form.save(commit=False)
-            if pallet.quantity > pallet.quantity_thermal_deburred_no_ok:
+            if pallet.quantity >= pallet.quantity_thermal_deburred_no_ok:
                 pallet.employee_thermal_deburring = request.user
                 pallet.quantity_thermal_deburred = pallet.quantity - pallet.quantity_thermal_deburred_no_ok
                 pallet.weight_thermal_deburred_no_ok = pallet.quantity_thermal_deburred_no_ok * pallet.article.weight / 1000

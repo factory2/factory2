@@ -57,6 +57,10 @@ def pallets(request):
     pallets = Pallet.objects.all()
     return render(request, 'articles/pallets.html', {'pallets': pallets})
 
+def pallets_thermal_deburred(request):
+    pallets = Pallet.objects.filter(thermal_deburred = True).order_by('-thermal_deburred_date')
+    return render(request, 'articles/pallets_thermal_deburred.html', {'pallets': pallets})
+
 
 def pallet_new(request):
     if request.method == "POST":
@@ -84,7 +88,7 @@ def pallet_thermal_deburred_new(request, pk):
                 pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * pallet.article.weight / 1000
                 pallet.thermal_deburred = True
                 pallet.save()
-                return redirect('pallets')
+                return redirect('pallets_thermal_deburred')
             else:
                 error = "The quantity article no ok can't be more than quantity of all articles in the pallet"
                 return render(request, 'articles/pallet_thermal_deburred_new.html', { 'form': form, 'error':error })

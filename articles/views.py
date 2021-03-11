@@ -57,10 +57,13 @@ def pallets(request):
     pallets = Pallet.objects.all()
     return render(request, 'articles/pallets.html', {'pallets': pallets})
 
+def pallets_for_thermal_deburring(request):
+    pallets = Pallet.objects.filter(article__for_thermal_deburring = True, thermal_deburred = False)
+    return render(request, 'articles/pallets_for_thermal_deburring.html', {'pallets': pallets})
+
 def pallets_thermal_deburred(request):
     pallets = Pallet.objects.filter(thermal_deburred = True).order_by('-thermal_deburred_date')
     return render(request, 'articles/pallets_thermal_deburred.html', {'pallets': pallets})
-
 
 def pallet_new(request):
     if request.method == "POST":

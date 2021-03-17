@@ -12,7 +12,15 @@ def articles(request):
 
 def article_detail(request, code):
     article = get_object_or_404(Article, code=code)
-    return render(request, 'articles/article_detail.html', {'article': article})
+    pallets = Pallet.objects.all().filter(article__code=code)
+    if pallets:
+        list_article_quantity_produced = []
+        for pallet in pallets:
+            list_article_quantity_produced.append(pallet.quantity)
+            article_quantity_produced = sum(list_article_quantity_produced)
+        return render(request, 'articles/article_detail.html', {'article': article, 'article_quantity_produced': article_quantity_produced})
+    else:
+        return render(request, 'articles/article_detail.html', {'article': article})
 
 def article_new(request):
     if request.method == "POST":
@@ -100,4 +108,3 @@ def pallet_thermal_deburred_new(request, pk):
     else:
         form = PalletThermalDeburredNewForm()
         return render(request, 'articles/pallet_thermal_deburred_new.html', {'form': form})
-

@@ -17,6 +17,7 @@ def article_thermal_deburring_new(request):
         form = ThermalDeburringNewForm(request.POST)
         if form.is_valid():
             article_thermal_deburring = form.save(commit=False)
+            article_thermal_deburring.employee = request.user
             article_thermal_deburring.save()
             return redirect('article_thermal_deburring_detail', article_code=article_thermal_deburring)
         else:

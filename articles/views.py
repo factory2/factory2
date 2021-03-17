@@ -17,7 +17,7 @@ def article_detail(request, code):
         list_article_quantity_produced = []
         for pallet in pallets:
             list_article_quantity_produced.append(pallet.quantity)
-            article_quantity_produced = sum(list_article_quantity_produced)
+        article_quantity_produced = sum(list_article_quantity_produced)
         return render(request, 'articles/article_detail.html', {'article': article, 'article_quantity_produced': article_quantity_produced})
     else:
         return render(request, 'articles/article_detail.html', {'article': article})

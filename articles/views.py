@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Article, Pallet
 from .forms import ArticleNewForm, ArticleEditForm, PalletForm, PalletThermalDeburredNewForm
-from tasks.models import PalletThermalDeburred
+from tasks.models import ThermalDeburring, PalletThermalDeburred
 from rest_framework import viewsets
 from .serializers import ArticleSerializer
 
@@ -27,6 +27,11 @@ def article_new(request):
         form = ArticleNewForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save(commit=False)
+            if article.for_thermal_deburring:
+                article.save()
+                article_thermal_deburring = ThermalDeburring(article=article)
+                article_thermal_deburring.save()
+                return redirect('article_thermal_deburring_edit', article_code = article.code)
             article.save()
             return redirect('article_detail', code=article.code)
         else:
@@ -50,7 +55,12 @@ def article_edit(request, code):
                         pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * article.weight / 1000
                         pallet.save()
             article.save()
-            return redirect('article_detail', code=article.code)
+            if article.for_thermal_deburring:
+                article_thermal_deburring = ThermalDeburring(article=article)
+                article_thermal_deburring.save()
+                return redirect('article_thermal_deburring_edit', article_code = article.code)
+            else:
+                return redirect('article_detail', code=article.code)
     else:
         form = ArticleEditForm(instance=article)
         return render(request, 'articles/article_edit.html', {'form': form}, locals())

@@ -55,10 +55,16 @@ def article_edit(request, code):
                         pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * article.weight / 1000
                         pallet.save()
             article.save()
-            if article.for_thermal_deburring:
+            if hasattr(article, 'thermaldeburring') == True and article.for_thermal_deburring:
+                return redirect('article_thermal_deburring_edit', article_code = article.code)
+            elif article.for_thermal_deburring:
                 article_thermal_deburring = ThermalDeburring(article=article)
                 article_thermal_deburring.save()
                 return redirect('article_thermal_deburring_edit', article_code = article.code)
+            elif hasattr(article, 'thermaldeburring'):
+                article_thermal_deburring = ThermalDeburring.objects.get(article=article)
+                article_thermal_deburring.delete()
+                return redirect('article_detail', code=article.code)
             else:
                 return redirect('article_detail', code=article.code)
     else:

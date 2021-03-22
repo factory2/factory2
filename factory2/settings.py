@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     'tasks',
     'zamak',
     'blog',
+    'pwa',
 ]
 
+
+# PWA
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/pwa', 'serviceworker.js')
 
 # Graphene
 GRAPHENE = {

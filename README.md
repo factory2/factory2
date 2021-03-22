@@ -27,10 +27,40 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 LANGUAGE_CODE = 'it'
 TIME_ZONE='Europe/Rome'
+PWA_APP_NAME = 'Factory2'
+PWA_APP_DESCRIPTION = "Factory project"
+PWA_APP_THEME_COLOR = '#000000'
+PWA_APP_BACKGROUND_COLOR = '#000000'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/logos/factory2.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/logos/factory2apple.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/images/icons/splash-640x1136.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'it-IT'
 ```
 ```bash
 python manage.py migrate
 python manage.py createsuperuser
+python manage.py collectstatic
 python manage.py runserver
 ```
 

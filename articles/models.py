@@ -2,12 +2,14 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from departments.models import Department
+from zamak.models import Zamak
 
 class Article(models.Model):
     code=models.SlugField(max_length=50, unique=True)
     title=models.CharField(max_length=200, blank=True, null=True)
     description=models.TextField(blank=True, null=True)
     weight = models.PositiveIntegerField(default=1)
+    zamak = models.ForeignKey(Zamak, on_delete = models.CASCADE, blank=True, null=True) 
     image1=models.ImageField(upload_to='articles', blank=True, null=True)
     image2=models.ImageField(upload_to='articles', blank=True, null=True)
     image3=models.ImageField(upload_to='articles', blank=True, null=True) 

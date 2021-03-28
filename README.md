@@ -61,7 +61,6 @@ PWA_APP_LANG = 'it-IT'
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py collectstatic
-python manage.py runserver
 ```
 
 ## Brand customization
@@ -86,7 +85,10 @@ vim templates/includes/title.html
 ```bash
 django-admin compilemessages
 ```
-
+## Run server
+```python
+python manage.py runserver
+```
 ## Change logo
 In the local machine
 ```bash

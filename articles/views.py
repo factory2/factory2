@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from .models import Article, Pallet
 from .forms import ArticleNewForm, ArticleEditForm, PalletForm, PalletThermalDeburredNewForm
 from tasks.models import ThermalDeburring, PalletThermalDeburred
-from rest_framework import viewsets
-from .serializers import ArticleSerializer
 
 def articles(request):
     articles = Article.objects.all().order_by('code')
@@ -70,12 +68,6 @@ def article_edit(request, code):
     else:
         form = ArticleEditForm(instance=article)
         return render(request, 'articles/article_edit.html', {'form': form}, locals())
-
-
-class ArticleView(viewsets.ModelViewSet):
-    serializer_class = ArticleSerializer
-    queryset = Article.objects.all()
-
 
 def pallets(request):
     pallets = Pallet.objects.all()

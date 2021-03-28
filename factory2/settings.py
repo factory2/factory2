@@ -31,12 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_django',
     'storages',
     'accounts',
     'crispy_forms',
-    'rest_framework',
-    'corsheaders',
     'sorl.thumbnail',
     'import_export',
     'articles',
@@ -51,11 +48,6 @@ INSTALLED_APPS = [
 
 # PWA
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/pwa', 'serviceworker.js')
-
-# Graphene
-GRAPHENE = {
-    "SCHEMA": "schema.schema"
-}
 
 
 # Crispy forms

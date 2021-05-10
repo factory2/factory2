@@ -9,10 +9,10 @@ class Article(models.Model):
     title=models.CharField(max_length=200, blank=True, null=True)
     description=models.TextField(blank=True, null=True)
     weight = models.PositiveIntegerField(default=1)
-    zamak = models.ForeignKey(Zamak, on_delete = models.CASCADE, blank=True, null=True) 
+    zamak = models.ForeignKey(Zamak, on_delete = models.CASCADE, blank=True, null=True)
     image1=models.ImageField(upload_to='articles', blank=True, null=True)
     image2=models.ImageField(upload_to='articles', blank=True, null=True)
-    image3=models.ImageField(upload_to='articles', blank=True, null=True) 
+    image3=models.ImageField(upload_to='articles', blank=True, null=True)
     image4=models.ImageField(upload_to='articles', blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
@@ -20,7 +20,7 @@ class Article(models.Model):
 
     def __str__(self):
         return self.code
-    
+
     class Meta:
         ordering = ['code']
 
@@ -39,7 +39,7 @@ class Pallet(models.Model):
     employee = models.ForeignKey(User, on_delete = models.CASCADE, blank=True, null=True)
     employee_thermal_deburring = models.ForeignKey(User, on_delete = models.CASCADE, related_name='pallet_thermal_deburred', blank=True, null=True)
     thermal_deburred = models.BooleanField(default=False)
-    
+
     def __str__(self):
         date_time = self.created_date.strftime("%d/%m/%Y, %H:%M:%S")
         return date_time + ", " + self.article.code

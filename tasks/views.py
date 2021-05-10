@@ -4,9 +4,12 @@ from .models import ThermalDeburring
 from .forms import ThermalDeburringNewForm, ThermalDeburringEditForm, PalletThermalDeburredNewForm
 from django.utils import timezone
 
+current_year = timezone.now().strftime("%Y")
+current_month = timezone.now().strftime("%m")
+
 def articles_thermal_deburring(request):
     articles_thermal_deburring = ThermalDeburring.objects.all()
-    return render(request, 'tasks/articles_thermal_deburring.html', {'articles_thermal_deburring': articles_thermal_deburring})
+    return render(request, 'tasks/articles_thermal_deburring.html', { 'articles_thermal_deburring': articles_thermal_deburring, 'current_year': current_year, 'current_month': current_month })
 
 def article_thermal_deburring_detail(request, article_code):
     article_thermal_deburring = get_object_or_404(ThermalDeburring, article__code=article_code)

@@ -3,10 +3,14 @@ from django.http import HttpResponse
 from .models import Article, Pallet
 from .forms import ArticleNewForm, ArticleEditForm, PalletForm, PalletThermalDeburredNewForm
 from tasks.models import ThermalDeburring, PalletThermalDeburred
+from django.utils import timezone
+
+current_year = timezone.now().strftime("%Y")
+current_month = timezone.now().strftime("%m")
 
 def articles(request):
     articles = Article.objects.all().order_by('code')
-    return render(request, 'articles/articles.html', {'articles': articles})
+    return render(request, 'articles/articles.html', {'articles': articles, 'current_year': current_year, 'current_month': current_month })
 
 def article_detail(request, code):
     article = get_object_or_404(Article, code=code)
@@ -71,25 +75,38 @@ def article_edit(request, code):
 
 def pallets(request):
     pallets = Pallet.objects.all()
-    return render(request, 'articles/pallets.html', {'pallets': pallets})
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month })
+
+def pallets_current_month(request, year, month):
+    pallets = Pallet.objects.filter(created_date__year = year, created_date__month = month)
+    date = str(year) + "/" + str(month)
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'date': date, 'current_year': year, 'current_month': month })
 
 def pallets_for_thermal_deburring(request):
+    heading = "Pallets for thermal deburring"
     pallets = Pallet.objects.filter(article__for_thermal_deburring = True, thermal_deburred = False)
-    return render(request, 'articles/pallets_for_thermal_deburring.html', {'pallets': pallets})
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading })
 
 def pallets_thermal_deburred(request):
     pallets = Pallet.objects.filter(thermal_deburred = True).order_by('-thermal_deburred_date')
-    return render(request, 'articles/pallets_thermal_deburred.html', {'pallets': pallets})
+    heading = "Pallets thermal deburred"
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading })
+
+def pallets_thermal_deburred_current_month(request, year, month):
+    pallets = Pallet.objects.filter(thermal_deburred = True, thermal_deburred_date__year = year, thermal_deburred_date__month = month).order_by('-thermal_deburred_date')
+    date = str(year) + "/" + str(month)
+    heading = "Pallets thermal deburred"
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading, 'date': date })
 
 def pallet_new(request):
     if request.method == "POST":
         form = PalletForm(request.POST)
         if form.is_valid():
             pallet = form.save(commit=False)
-            pallet.employee = request.user 
+            pallet.employee = request.user
             pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
             pallet.save()
-            return redirect('pallets')
+            return redirect('pallets_current_month', year=current_year, month=current_month)
     else:
         form = PalletForm()
         return render(request, 'articles/pallet_new.html', {'form': form})
@@ -107,7 +124,7 @@ def pallet_thermal_deburred_new(request, pk):
                 pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * pallet.article.weight / 1000
                 pallet.thermal_deburred = True
                 pallet.save()
-                return redirect('pallets_thermal_deburred')
+                return redirect('pallets_thermal_deburred_current_month', year=current_year, month=current_month)
             else:
                 error = "The quantity article no ok can't be more than quantity of all articles in the pallet"
                 return render(request, 'articles/pallet_thermal_deburred_new.html', { 'form': form, 'error':error })

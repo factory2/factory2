@@ -75,13 +75,16 @@ def article_edit(request, code):
 
 def pallets(request):
     pallets = Pallet.objects.all()
-    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month })
+    pallets_count = len(pallets)
+    heading = "All pallets"
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'pallets_count': pallets_count, 'heading': heading })
 
 def pallets_current_month(request, year, month):
     pallets = Pallet.objects.filter(created_date__year = year, created_date__month = month)
+    pallets_count = len(pallets)
     heading = "Pallets"
     date = str(year) + "/" + str(month)
-    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'date': date, 'current_year': year, 'current_month': month, 'heading': heading })
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'date': date, 'current_year': year, 'current_month': month, 'heading': heading, 'pallets_count': pallets_count })
 
 def pallets_for_thermal_deburring(request):
     heading = "Pallets for thermal deburring"
@@ -90,14 +93,16 @@ def pallets_for_thermal_deburring(request):
 
 def pallets_thermal_deburred(request):
     pallets = Pallet.objects.filter(thermal_deburred = True).order_by('-thermal_deburred_date')
+    pallets_count = len(pallets)
     heading = "Pallets thermal deburred"
-    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading })
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading , 'pallets_count': pallets_count })
 
 def pallets_thermal_deburred_current_month(request, year, month):
     pallets = Pallet.objects.filter(thermal_deburred = True, thermal_deburred_date__year = year, thermal_deburred_date__month = month).order_by('-thermal_deburred_date')
+    pallets_count = len(pallets)
     date = str(year) + "/" + str(month)
     heading = "Pallets thermal deburred"
-    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading, 'date': date })
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading, 'date': date, 'pallets_count': pallets_count })
 
 def pallet_new(request):
     if request.method == "POST":

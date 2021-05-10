@@ -79,8 +79,9 @@ def pallets(request):
 
 def pallets_current_month(request, year, month):
     pallets = Pallet.objects.filter(created_date__year = year, created_date__month = month)
+    heading = "Pallets"
     date = str(year) + "/" + str(month)
-    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'date': date, 'current_year': year, 'current_month': month })
+    return render(request, 'articles/pallets.html', { 'pallets': pallets, 'date': date, 'current_year': year, 'current_month': month, 'heading': heading })
 
 def pallets_for_thermal_deburring(request):
     heading = "Pallets for thermal deburring"

@@ -32,6 +32,7 @@ urlpatterns = [
     path('tasks/', include('tasks.urls')),
     path('zamak/', include('zamak.urls')),
     path('departments/', include('departments.urls')),
+    path('machines/', include('machines.urls')),
     path('', include('pwa.urls')),
 ]
 

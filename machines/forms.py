@@ -6,16 +6,16 @@ class ThermalDeburrerForm(forms.ModelForm):
 
     class Meta:
         model = ThermalDeburrer
-        fields = ('basket_deburring', 'parameter_deburring',)
+        fields = ("__all__")
 
 class BasketDeburringForm(forms.ModelForm):
 
     class Meta:
-        models = BasketDeburring
+        model = BasketDeburring
         fields = ('title', 'description', 'image',)
 
 class ParameterDeburringForm(forms.ModelForm):
 
     class Meta:
-        models = ParameterDeburring
+        model = ParameterDeburring
         fields = ('title', 'description',)

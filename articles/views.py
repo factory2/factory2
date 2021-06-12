@@ -5,11 +5,10 @@ from .forms import ArticleNewForm, ArticleEditForm, PalletForm, PalletThermalDeb
 from tasks.models import ThermalDeburring, PalletThermalDeburred
 from django.utils import timezone
 
-current_year = timezone.now().strftime("%Y")
-current_month = timezone.now().strftime("%m")
-
 def articles(request):
     articles = Article.objects.all().order_by('code')
+    current_year = timezone.now().strftime("%Y")
+    current_month = timezone.now().strftime("%m")
     return render(request, 'articles/articles.html', {'articles': articles, 'current_year': current_year, 'current_month': current_month })
 
 def article_detail(request, code):
@@ -77,9 +76,13 @@ def pallets(request):
     pallets = Pallet.objects.all()
     pallets_count = len(pallets)
     heading = "All pallets"
+    current_year = timezone.now().strftime("%Y")
+    current_month = timezone.now().strftime("%m")
     return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'pallets_count': pallets_count, 'heading': heading })
 
 def pallets_current_month(request, year, month):
+    current_year = timezone.now().strftime("%Y")
+    current_month = timezone.now().strftime("%m")
     pallets = Pallet.objects.filter(created_date__year = year, created_date__month = month)
     pallets_count = len(pallets)
     heading = "Pallets"
@@ -87,17 +90,23 @@ def pallets_current_month(request, year, month):
     return render(request, 'articles/pallets.html', { 'pallets': pallets, 'date': date, 'current_year': year, 'current_month': month, 'heading': heading, 'pallets_count': pallets_count })
 
 def pallets_for_thermal_deburring(request):
+    current_year = timezone.now().strftime("%Y")
+    current_month = timezone.now().strftime("%m")
     heading = "Pallets for thermal deburring"
     pallets = Pallet.objects.filter(article__for_thermal_deburring = True, thermal_deburred = False)
     return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading })
 
 def pallets_thermal_deburred(request):
+    current_year = timezone.now().strftime("%Y")
+    current_month = timezone.now().strftime("%m")
     pallets = Pallet.objects.filter(thermal_deburred = True).order_by('-thermal_deburred_date')
     pallets_count = len(pallets)
     heading = "Pallets thermal deburred"
     return render(request, 'articles/pallets.html', { 'pallets': pallets, 'current_year': current_year, 'current_month': current_month, 'heading': heading , 'pallets_count': pallets_count })
 
 def pallets_thermal_deburred_current_month(request, year, month):
+    current_year = timezone.now().strftime("%Y")
+    current_month = timezone.now().strftime("%m")
     pallets = Pallet.objects.filter(thermal_deburred = True, thermal_deburred_date__year = year, thermal_deburred_date__month = month).order_by('-thermal_deburred_date')
     pallets_count = len(pallets)
     date = str(year) + "/" + str(month)
@@ -108,6 +117,8 @@ def pallet_new(request):
     if request.method == "POST":
         form = PalletForm(request.POST)
         if form.is_valid():
+            current_year = timezone.now().strftime("%Y")
+            current_month = timezone.now().strftime("%m")
             pallet = form.save(commit=False)
             pallet.employee = request.user
             pallet.weight = pallet.article.weight * pallet.quantity / 1000 # Weight pallet in kg
@@ -130,6 +141,8 @@ def pallet_thermal_deburred_new(request, pk):
                 pallet.weight_thermal_deburred = pallet.quantity_thermal_deburred * pallet.article.weight / 1000
                 pallet.thermal_deburred = True
                 pallet.save()
+                current_year = timezone.now().strftime("%Y")
+                current_month = timezone.now().strftime("%m")
                 return redirect('pallets_thermal_deburred_current_month', year=current_year, month=current_month)
             else:
                 error = "The quantity article no ok can't be more than quantity of all articles in the pallet"
